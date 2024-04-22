@@ -1,8 +1,27 @@
 class Player {
 
-    constructor(x, y) {
-        this.x = x
-        this.y = y
+    constructor(top, left) {
+        this.top = top
+        this.left = left
+        this.type = 'player'
+        this.image = 'url(./Images/player.png)'
+    }
+
+    move(string) {
+        switch (string) {
+            case 'up':
+                console.log('player goes up!')
+                break
+            case 'down':
+                console.log('player goes down!')
+                break
+            case 'left':
+                console.log('player goes left!')
+                break
+            case 'right':
+                console.log('player goes right!')
+                break
+        }
     }
 
     playerMove(map, initialTop, initialLeft, direction) {

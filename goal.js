@@ -1,7 +1,18 @@
 class Goal {
-    constructor(x, y) {
-        this.x = x
-        this.y = y
+    constructor(top, left) {
+        this.top = top
+        this.left = left
+        this.type = 'goal'
+        this.image = 'gray'
+
+        this.goalSize = {
+            w: 80,
+            h: 80
+        }
+
+
+
+        //this.init()
     }
 
 }
