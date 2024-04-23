@@ -1,12 +1,12 @@
-class Box {
+class Wall {
 
     constructor(top, left) {
         this.top = top
         this.left = left
-        this.type = 'box'
+        this.type = 'wall'
         this.image = 'brown'
 
-        this.boxSize = {
+        this.wallSize = {
             w: 80,
             h: 80
         }
@@ -16,7 +16,4 @@ class Box {
         //this.init()
     }
 
-    move(direction) {
-
-    }
 }

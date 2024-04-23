@@ -8,8 +8,9 @@ const Game = {
     },
 
     gameLevels: {
-        one: '0 0 0 0 0,0 8 0 0 0,9 7 7 0 0,0 0 0 0 0,0 0 0 0 0',
-        two: '0 0 0 0 0,0 7 8 0 8,0 9 0 0 0,0 7 8 0 8,0 0 0 0 0',
+        zero: '0 0 0 0 0,0 0 0 0 0,0 0 9 0 0,0 0 0 0 0,0 0 0 0 0',
+        one: '0 0 0 0 0,0 8 0 0 0,9 0 0 0 0,0 0 0 8 0,0 0 8 0 0',
+        two: '0 0 0 0 0,0 7 8 0 8,0 9 0 1 0,0 7 8 0 8,0 0 0 0 0',
         three: '0 0 0 0 0,0 8 9 8 0,0 7 7 7 0,0 8 0 8 0,0 0 0 0 0'
     },
 
@@ -26,6 +27,7 @@ const Game = {
 
     init() {
         this.setGameSize()
+        this.setEventListeners()
         this.start()
     },
 
@@ -60,15 +62,24 @@ const Game = {
 
     start() {
         this.createElements()
-        this.setEventListeners()
         //this.startGameLoop()
     },
 
     createElements() {
         this.board = new Board(this.gameScreen, this.gameSize, 5, 5)
-        this.board.grid = this.board.createBoard(this.gameLevels.one)
-        console.log(this.board.grid)
+        this.board.grid = this.board.createBoard(this.gameLevels.two)
         this.board.updateBoard()
+    },
+
+    // En caso de que podamos animar!
+    startGameLoop() {
+
+        setInterval(() => {
+
+            this.board.updateBoard()
+
+        }, 60)
+
     }
 
 }
