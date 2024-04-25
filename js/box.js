@@ -5,7 +5,7 @@ class Box {
         this.left = left
         this.board = board
         this.type = 'box'
-        this.image = 'orange'
+        this.image = 'url(./Images/CAJA.png)'
     }
 
     move(direction) {

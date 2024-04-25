@@ -7,3 +7,9 @@
     position: relative;
     overflow: hidden;
 }
+
+@font-face {
+    font-family: 'LLPIXEL3';
+    src: url('../fonts/LLPIXEL3.ttf') format('woff2'),
+
+}

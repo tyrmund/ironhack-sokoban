@@ -17,9 +17,8 @@ class Board {
         this.sizeY = sizeY
         this.grid = Array.from({ length: this.sizeY }, () => new Array(this.sizeX))
         this.player = null
-        this.walls = []
+        this.steps = 0
         this.boxes = []
-        this.holes = []
         this.goals = []
 
         this.init()
@@ -27,13 +26,31 @@ class Board {
 
     init() {
         this.boardElement = document.createElement('div')
-
     }
 
     updateBoard() {
 
         const oldContainer = document.querySelector('.cell-container')
+        const oldSteps = document.querySelector('.steps-container')
         if (oldContainer !== null) oldContainer.remove()
+        if (oldSteps !== null) oldSteps.remove()
+
+        const stepsContainer = document.createElement('div')
+        stepsContainer.setAttribute('class', 'steps-container')
+        stepsContainer.style.position = "absolute"
+        stepsContainer.style.width = `80px`
+        stepsContainer.style.height = `40px`
+        stepsContainer.style.left = `${(this.gameSize.w / 2) - 42}px`
+        stepsContainer.style.top = `${(this.gameSize.h / 2) - 40 + 260}px`
+        stepsContainer.style.backgroundColor = 'white'
+        stepsContainer.style.borderRadius = '7px'
+        stepsContainer.style.border = `4px solid black`
+        stepsContainer.style.textAlign = 'center'
+        stepsContainer.style.lineHeight = '42px'
+        stepsContainer.style.fontSize = '14px'
+        stepsContainer.style.fontFamily = "LLPIXEL3, sans-serif"
+        stepsContainer.style.boxShadow = '2px 2px 5px 1px rgba(0, 0, 0, .6)'
+        stepsContainer.innerText = `Steps: ${this.steps}`
 
         const cellContainer = document.createElement('div')
         cellContainer.setAttribute('class', 'cell-container')
@@ -42,15 +59,17 @@ class Board {
 
             for (let j = 0; j < this.sizeY; j++) {
 
-                cellContainer.appendChild(this.printCell(i, j, this.grid[i][j].image))
+                cellContainer.appendChild(this.printCell(i, j, this.grid[i][j]))
 
             }
         }
 
         this.gameScreen.appendChild(cellContainer)
+        this.gameScreen.appendChild(stepsContainer)
+
     }
 
-    printCell(j, i, image) {
+    printCell(j, i, cellObject) {
 
         const cell = document.createElement('div')
         cell.setAttribute('class', `top${j}-left${i}`)
@@ -59,19 +78,17 @@ class Board {
         cell.style.height = `80px`
         cell.style.left = `${((this.gameSize.w / 2) - 200) + (80 * i)}px`
         cell.style.top = `${((this.gameSize.h / 2) - 200) + (80 * j)}px`
-        if (image === 'url(./Images/player.png)') {
-            cell.style.backgroundImage = image
-            cell.style.backgroundSize = 'cover'
-            cell.style.border = `5px solid black`
-        } else if (this.goals.some(goal => goal[0] === j && goal[1] === i)) {
-            cell.style.backgroundColor = 'gray'
-            cell.style.border = `5px solid black`
+        cell.style.border = '3px solid #000000'
+        cell.style.backgroundSize = 'cover'
+
+        const isGoal = this.goals.some(goal => goal[0] === cellObject.top && goal[1] === cellObject.left)
+
+        if (cellObject.type === 'empty' && isGoal) {
+            cell.style.backgroundImage = 'url(./Images/GOAL.png)'
         } else {
-            cell.style.backgroundColor = image
-            cell.style.border = `5px solid black`
+            cell.style.backgroundImage = cellObject.image
         }
 
-        //this.gameScreen.appendChild(cell)
         return cell
     }
 
@@ -91,8 +108,9 @@ class Board {
                         this.goals.push([i, j])
                         break
                     case '7':
-                        array.push(new Box(i, j, this))
-                        this.boxes.push([i, j])
+                        const newBox = new Box(i, j, this)
+                        array.push(newBox)
+                        this.boxes.push(newBox)
                         break
                     case '8':
                         array.push(new Wall(i, j))
@@ -108,7 +126,7 @@ class Board {
         return grid
     }
 
-    compareArrays(arr1, arr2) {
+    areArraysEqual(arr1, arr2) {
         if (arr1.length !== arr2.length) return false
         else {
             for (let i = 0; i < arr1.length; i++) {
@@ -118,10 +136,10 @@ class Board {
         }
     }
 
-    isEnded(boxes, goalArray) {
+    isOver(boxes, goalArray) {
         let allIn = true
         boxes.forEach(box => {
-            const found = goalArray.some(goal => compareArrays([box.top, box.left], goal))
+            const found = goalArray.some(goal => this.areArraysEqual([box.top, box.left], goal))
             allIn = allIn && found
         })
         return allIn

@@ -5,14 +5,6 @@ class Goal {
         this.type = 'goal'
         this.image = 'gray'
 
-        this.goalSize = {
-            w: 80,
-            h: 80
-        }
-
-
-
-        //this.init()
     }
 
 }

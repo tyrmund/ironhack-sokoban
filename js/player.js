@@ -20,7 +20,6 @@ class Player {
             switch (direction) {
                 case 'up': {
                     const nextBox = this.board.grid[this.top - 1][this.left]
-                    console.log(nextBox)
                     if (!nextBox.isNextCellBlocked(direction)) {
                         nextBox.move(direction)
                         this.changePosition(direction)
@@ -29,7 +28,6 @@ class Player {
                 }
                 case 'down': {
                     const nextBox = this.board.grid[this.top + 1][this.left]
-                    console.log(nextBox)
                     if (!nextBox.isNextCellBlocked(direction)) {
                         nextBox.move(direction)
                         this.changePosition(direction)
@@ -38,7 +36,6 @@ class Player {
                 }
                 case 'left': {
                     const nextBox = this.board.grid[this.top][this.left - 1]
-                    console.log(nextBox)
                     if (!nextBox.isNextCellBlocked(direction)) {
                         nextBox.move(direction)
                         this.changePosition(direction)
@@ -85,6 +82,7 @@ class Player {
                     const targetObject = this.board.grid[start.top - 1][start.left]
                     this.board.grid[start.top][start.left] = targetObject
                     this.board.grid[start.top - 1][start.left] = start
+                    this.board.steps++
                     targetObject.top++
                     start.top--
                     break
@@ -93,6 +91,7 @@ class Player {
                     const targetObject = this.board.grid[start.top + 1][start.left]
                     this.board.grid[start.top][start.left] = targetObject
                     this.board.grid[start.top + 1][start.left] = start
+                    this.board.steps++
                     targetObject.top--
                     start.top++
                     break
@@ -101,6 +100,7 @@ class Player {
                     const targetObject = this.board.grid[start.top][start.left + 1]
                     this.board.grid[start.top][start.left] = targetObject
                     this.board.grid[start.top][start.left + 1] = start
+                    this.board.steps++
                     targetObject.left--
                     start.left++
                     break
@@ -109,6 +109,7 @@ class Player {
                     const targetObject = this.board.grid[start.top][start.left - 1]
                     this.board.grid[start.top][start.left] = targetObject
                     this.board.grid[start.top][start.left - 1] = start
+                    this.board.steps++
                     targetObject.left++
                     start.left--
                     break

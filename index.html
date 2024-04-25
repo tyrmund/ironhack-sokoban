@@ -10,7 +10,30 @@
 
 <body>
 
-    <figure id="game-screen"></figure>
+    <div id="title-screen">
+        <img class="title-image" src="./images/TITLESCREEN.jpg" alt="">
+        <button class="start-button" type="button"></button>
+    </div>
+
+    <div id="pre-game-screen">
+        <img class="level-image" src="./images/NEXT-LEVEL.png" alt="">
+        <h2 class="level-info"></h2>
+    </div>
+
+    <div id="next-level-screen">
+        <h2 class="next-level-info"></h2>
+        <h4 class="total-steps"></h4>
+    </div>
+
+    <div id="game-screen">
+        <button class="reset-button" type="button"></button>
+    </div>
+
+
+    <div id="end-screen">
+        <img class="end-image" src="./images/ENDSCREEN.png" alt="">
+        <button class="reload-button" type="button"></button>
+    </div>
 
     <script src="./js/player.js"></script>
     <script src="./js/empty.js"></script>
