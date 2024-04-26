@@ -4,7 +4,7 @@ class Empty {
         this.top = top
         this.left = left
         this.type = 'empty'
-        this.image = 'url(./Images/EMPTY.png)'
+        this.image = 'url(./images/EMPTY.png)'
 
     }
 }

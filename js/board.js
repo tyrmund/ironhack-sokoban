@@ -84,7 +84,7 @@ class Board {
         const isGoal = this.goals.some(goal => goal[0] === cellObject.top && goal[1] === cellObject.left)
 
         if (cellObject.type === 'empty' && isGoal) {
-            cell.style.backgroundImage = 'url(./Images/GOAL.png)'
+            cell.style.backgroundImage = 'url(./images/GOAL.png)'
         } else {
             cell.style.backgroundImage = cellObject.image
         }

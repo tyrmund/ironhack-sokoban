@@ -5,7 +5,7 @@ class Player {
         this.left = left
         this.board = board
         this.type = 'player'
-        this.image = 'url(./Images/player.png)'
+        this.image = 'url(./images/player.png)'
     }
 
     switchCells() {
